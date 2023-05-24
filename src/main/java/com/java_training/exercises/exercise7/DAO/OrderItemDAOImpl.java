@@ -44,19 +44,49 @@ public class OrderItemDAOImpl implements OrderItemDAO<OrderItem> {
 		}
 		return orders;
 	}
+	
+
+
+	@Override
+	public List<OrderItem> getOrdersByRegion(String region) {
+		List<OrderItem> orders = new ArrayList<>();
+		String sqlQuery = "SELECT * FROM exercises_table WHERE LOWER(region) = '" + region + "'";
+		Statement statement = null;
+		
+		try {
+			statement = conn.createStatement();
+	        ResultSet resultSet = statement.executeQuery(sqlQuery);
+	        
+	        while (resultSet.next()) {
+	        	OrderItem order = extractOrderFromResultSet(resultSet);
+	        	orders.add(order);
+	        }
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException ex) {
+					System.err.println(ex.getMessage());
+				}
+			}
+		}
+		return orders;
+	}
 
 	@Override
 	public OrderItem getOrderItemByCode(String code) throws SQLException {
 		OrderItem order = null;
 		String sqlQuery = "SELECT * FROM exercises_table WHERE code = ?";
-		try (PreparedStatement statement = conn.prepareStatement(sqlQuery)) {
-            statement.setString(1, code);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                	order = extractOrderFromResultSet(resultSet);
-                }
-            }
-        }
+			try (PreparedStatement statement = conn.prepareStatement(sqlQuery)) {
+	            statement.setString(1, code);
+	            try (ResultSet resultSet = statement.executeQuery()) {
+	                if (resultSet.next()) {
+	                	order = extractOrderFromResultSet(resultSet);
+	                }
+	            }
+	        }
 		return order;
 	}
 	
@@ -75,5 +105,4 @@ public class OrderItemDAOImpl implements OrderItemDAO<OrderItem> {
 
 	    return order;
 	}
-
 }
