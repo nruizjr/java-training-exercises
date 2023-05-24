@@ -1,4 +1,4 @@
-package com.java_training.exercises.exercise5;
+package com.java_training.exercises.exercise7;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -12,10 +12,10 @@ import java.sql.SQLException;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 public class DatabaseConnectionManager {
-	private static final String url = "jdbc:postgresql://localhost/java_exercises";
 	private static final String user = "postgres";
 	private static final String password = "1234";	
-    private static final String tableName = "groceries";
+    private static final String tableName = "java_exercises";
+	private static final String url = "jdbc:postgresql://localhost/" + tableName;
 	
 	
 	public Connection connect() {
