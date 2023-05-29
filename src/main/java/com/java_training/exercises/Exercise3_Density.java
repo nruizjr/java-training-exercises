@@ -13,7 +13,7 @@ public class Exercise3_Density {
 	public static void main(String[] args) {
 		startMenu();
 	}
-	
+	//Starts menu
 	private static void startMenu() {
 		try (Scanner input = new Scanner(System.in)) {
 			boolean validOption = false;
