@@ -11,10 +11,8 @@ import com.java_training.exercises.exercise7.OrderItem;
 import com.java_training.exercises.exercise7.DAO.OrderItemDAOImpl;
 
 public class MainClass {
-	
 
-
-	static DecimalFormat df = new DecimalFormat("#.##");
+	static DecimalFormat df = new DecimalFormat("0.00");
 	static final String EXIT_MSG = "Application has exited. Thank you.";
 	static final String TRY_AGAIN_MSG = "\n\nWould you like to try again(Y/N)? ";
 	
@@ -29,7 +27,7 @@ public class MainClass {
 		if (conn != null) {
 			if (dcm.initializeDatabase(conn)) {
 				dao = new OrderItemDAOImpl(conn);
-				startMenu(dao);
+				startMenu();
 			}
 			
 		} else {
@@ -37,7 +35,7 @@ public class MainClass {
 		}
 	}
 	
-	private static void startMenu(OrderItemDAOImpl dao) throws SQLException {
+	private static void startMenu() throws SQLException {
 			
 		System.out.println();
 		System.out.println("==================================================");
@@ -104,7 +102,7 @@ public class MainClass {
 		System.out.print(TRY_AGAIN_MSG);
 		tryAgain = input.next().toUpperCase();
 		if (tryAgain.equalsIgnoreCase("Y")) {
-			startMenu(dao);
+			startMenu();
 		} else {
 			input.close();
 			System.out.println(EXIT_MSG);

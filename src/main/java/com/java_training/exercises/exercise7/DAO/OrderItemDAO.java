@@ -9,4 +9,6 @@ public interface OrderItemDAO<T> {
 	List<T> getOrdersByRegion(String region);
 	
 	T getOrderItemByCode(String code) throws SQLException;
+	
+	boolean updateUnitCost(T t) throws SQLException;
 }

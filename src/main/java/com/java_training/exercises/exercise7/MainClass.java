@@ -10,7 +10,7 @@ import com.java_training.exercises.exercise7.DAO.OrderItemDAOImpl;
 
 public class MainClass {
 
-	static DecimalFormat df = new DecimalFormat("#.##");
+	static DecimalFormat df = new DecimalFormat("0.00");
 	static final String EXIT_MSG = "Application has exited. Thank you.";
 	static final String TRY_AGAIN_MSG = "\n\nWould you like to try again(Y/N)? ";
 	

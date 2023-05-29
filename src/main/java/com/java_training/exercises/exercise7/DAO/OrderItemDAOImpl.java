@@ -89,6 +89,24 @@ public class OrderItemDAOImpl implements OrderItemDAO<OrderItem> {
 	        }
 		return order;
 	}
+
+	@Override
+	public boolean updateUnitCost(OrderItem t) throws SQLException {
+		boolean flag = false;
+		String sqlQuery = "UPDATE exercises_table SET unit_cost = " + t.getUnit_cost() + 
+				", total = " + t.getTotal() + " WHERE code = '" + t.getCode() + "'";
+
+		try (Statement statement = conn.createStatement()) {
+			
+            int rowsUpdated = statement.executeUpdate(sqlQuery);
+            
+            flag = rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
+		return flag;
+	}
 	
 	private OrderItem extractOrderFromResultSet(ResultSet rs) throws SQLException {
 		OrderItem order = new OrderItem();
